@@ -12,7 +12,10 @@ var losses= 0;
 var guesses= 10;
 
 let docWords = document.getElementById('words');
-
+let docGuessed = document.getElementById('guessed');
+let docGuess = document.getElementById('guess');
+let docWin = document.getElementById('win');
+let docLoss = document.getElementById('loss');
 // FUNCTIONS
     // ==============================================================================
 
@@ -55,11 +58,21 @@ document.addEventListener('keypress', (event) => {
         guessedLetters.push(keyWord);
         wordView[genWord.indexOf(keyWord)] = keyWord;
         docWords.innerHTML = wordView.join(' ');
+        docGuessed.innerHTML = guessedLetters.join(' ');
     }
      else {
         guessedLetters.push(keyWord);
+        docGuessed.innerHTML = guessedLetters.join(' ');
+        docGuess.innerHTML = --guesses;
     }
     if(wordView.join('') == genWord) {
+        docWin.innerHTML = ++wins;
         alert ("You WIN!");
+        startUp();
+    }
+    if(guesses < 1) {
+        docLoss.innerHTML = ++losses;
+        alert ("You LOSE!");
+        startUp();
     }
 });
